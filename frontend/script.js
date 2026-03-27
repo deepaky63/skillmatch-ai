@@ -3,7 +3,7 @@
    API integration · Results rendering · UI state
 ═══════════════════════════════════════════════════════ */
 
-const API = "http://127.0.0.1:8000";
+const API = "https://skillmatch-ai-mmpn.onrender.com";
 const LAST_ANALYSIS_KEY = "skillmatch:last-analysis";
 
 const state = { selectedFile: null };
@@ -63,7 +63,8 @@ function restoreLastAnalysis() {
 /* ── Check API + load stats ─────────────────────────── */
 async function checkAPI() {
   try {
-    const res = await fetch(`${API}/api/stats`, { signal: AbortSignal.timeout(5000) });
+    // Increase timeout to 15 seconds to handle Render cold starts
+    const res = await fetch(`${API}/api/stats`, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error("bad");
     const data = await res.json();
     setApiStatus(true);
