@@ -60,6 +60,32 @@ function restoreLastAnalysis() {
   }
 }
 
+/* ── Clear Results ──────────────────────────────────── */
+function clearResults() {
+  sessionStorage.removeItem(LAST_ANALYSIS_KEY);
+  
+  // Reset result displays
+  if (elements.resultsSummary) elements.resultsSummary.textContent = "Awaiting analysis";
+  if (elements.skillsResults) {
+    elements.skillsResults.innerHTML = '<span class="placeholder-tag">Your skills will appear here</span>';
+  }
+  if (elements.jobResults) {
+    elements.jobResults.innerHTML = '<div class="empty-state"><span class="empty-icon">🎯</span>Run an analysis to view job matches and recommendations.</div>';
+  }
+  if (elements.gapResults) {
+    elements.gapResults.innerHTML = '<div class="empty-state"><span class="empty-icon">📊</span>Skill gaps and course recommendations will appear after analysis.</div>';
+  }
+  if (elements.careerPath) {
+    elements.careerPath.innerHTML = '<div class="empty-state"><span class="empty-icon">🛤️</span>Career progression recommendations will appear here.</div>';
+  }
+  
+  // Clear file selection
+  state.selectedFile = null;
+  if (elements.fileName) elements.fileName.textContent = "No file selected";
+  if (elements.fileInput) elements.fileInput.value = "";
+  if (elements.skillsInput) elements.skillsInput.value = "";
+}
+
 /* ── Check API + load stats ─────────────────────────── */
 async function checkAPI() {
   try {
