@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillMatch AI — Career Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background orbs (global atmosphere) -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div class="page-shell">
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="brand">
+        <div class="brand-mark">⬡</div>
+        <div>
+          <span class="brand-name">SkillMatch <em>AI</em></span>
+          <span class="brand-sub">Career Intelligence Platform</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#demo">Demo</a>
+        <a href="#features">Features</a>
+        <a href="#tech">Tech</a>
+        <a href="#footer">Contact</a>
+      </div>
+      <a class="nav-cta" href="#demo">Start Analysis →</a>
+    </nav>
+
+    <main>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-copy glass-card">
+          <span class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            AI-Powered Career Matching
+          </span>
+          <h1>AI-Powered Career Intelligence</h1>
+          <p>Parse resumes, extract high-value skills, match against role profiles, uncover gaps, and map the next move with premium career intelligence.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#demo">Analyze My Profile</a>
+            <a class="secondary-btn" href="#how-it-works">How it works</a>
+          </div>
+          <div class="stats-strip">
+            <div class="stat-card">
+              <span class="stat-label">Job Signals</span>
+              <strong id="jobs-count">30</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Analyses Run</span>
+              <strong id="analyses-count">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">API Status</span>
+              <strong id="hero-api-status">Checking…</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual glass-card">
+          <!-- Floating feature tags -->
+          <div class="floating-tag top-left">Resume Parsing</div>
+          <div class="floating-tag top-right">Gap Analysis</div>
+          <div class="floating-tag bottom-left">Course Guidance</div>
+          <div class="floating-tag bottom-right">Career Path</div>
+
+          <!-- Animated orbit -->
+          <div class="hero-orbit">
+            <div class="orbit-ring orbit-one">
+              <div class="orbit-dot orbit-dot-1"></div>
+            </div>
+            <div class="orbit-ring orbit-two">
+              <div class="orbit-dot orbit-dot-2"></div>
+            </div>
+            <div class="center-badge">
+              <span>Match Engine</span>
+              <strong>AI</strong>
+            </div>
+          </div>
+
+          <!-- Skill constellation tags -->
+          <div class="skill-constellation">
+            <span class="const-tag ct-1">Python</span>
+            <span class="const-tag ct-2">ML</span>
+            <span class="const-tag ct-3">React</span>
+            <span class="const-tag ct-4">SQL</span>
+            <span class="const-tag ct-5">Docker</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEMO -->
+      <section class="demo" id="demo">
+        <div class="section-header">
+          <span class="eyebrow">Interactive Demo</span>
+          <h2>Analyze a resume or skill profile in seconds.</h2>
+        </div>
+        <div class="demo-grid">
+
+          <!-- Upload Panel -->
+          <div class="glass-card upload-panel">
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" id="resume-file" accept=".pdf,.docx,.txt" hidden>
+              <div class="upload-content">
+                <div class="upload-icon">⬆</div>
+                <span class="upload-badge">Drop resume here</span>
+                <h3>Upload PDF, DOCX, or TXT</h3>
+                <p>Drag and drop your resume or click below to browse files.</p>
+                <button class="secondary-btn" id="browse-btn" type="button">Choose File</button>
+                <p class="file-meta" id="file-name">No file selected</p>
+              </div>
+            </div>
+            <div class="text-entry">
+              <label for="skills-input">Or paste your core skills</label>
+              <textarea id="skills-input" placeholder="Python, SQL, Machine Learning, FastAPI, React…"></textarea>
+            </div>
+            <div class="demo-actions">
+              <button class="primary-btn" id="analyze-btn" type="button">Analyze Profile</button>
+              <div class="api-chip">
+                <span class="api-dot" id="api-dot"></span>
+                <span>API</span>
+                <strong id="api-status">Checking…</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Panel -->
+          <div class="glass-card results-panel">
+            <div class="results-header">
+              <div>
+                <span class="eyebrow">Results</span>
+                <h3>Top Career Matches</h3>
+              </div>
+              <div class="score-pill" id="results-summary">Awaiting analysis</div>
+            </div>
+            <div class="skills-preview">
+              <h4>Extracted Skills</h4>
+              <div class="tag-list" id="skills-results">
+                <span class="placeholder-tag">Your skills will appear here</span>
+              </div>
+            </div>
+            <div class="job-list" id="job-results">
+              <div class="empty-state">
+                <span class="empty-icon">🎯</span>
+                Run an analysis to view job matches and recommendations.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAP ANALYSIS + CAREER PATH -->
+      <section class="insight-grid">
+        <div class="glass-card gap-panel">
+          <div class="section-header compact">
+            <span class="eyebrow">Skill Intelligence</span>
+            <h2>What to learn next.</h2>
+          </div>
+          <div id="gap-results" class="gap-list">
+            <div class="empty-state">
+              <span class="empty-icon">📊</span>
+              Skill gaps and course recommendations will appear after analysis.
+            </div>
+          </div>
+        </div>
+        <div class="glass-card timeline-panel">
+          <div class="section-header compact">
+            <span class="eyebrow">Career Path</span>
+            <h2>Your next 90 days.</h2>
+          </div>
+          <div id="career-path" class="timeline">
+            <div class="empty-state">
+              <span class="empty-icon">🛤️</span>
+              Career progression recommendations will appear here.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+          <span class="eyebrow">The Process</span>
+          <h2>Five steps from resume to roadmap.</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="glass-card step-card">
+            <span class="step-num">01</span>
+            <div class="step-icon">📄</div>
+            <h3>Upload</h3>
+            <p>Add a resume or paste your skills.</p>
+          </article>
+          <article class="glass-card step-card">
+            <span class="step-num">02</span>
+            <div class="step-icon">🔬</div>
+            <h3>Parse</h3>
+            <p>Extract structured text from PDF, DOCX, or TXT.</p>
+          </article>
+          <article class="glass-card step-card">
+            <span class="step-num">03</span>
+            <div class="step-icon">🔍</div>
+            <h3>Match</h3>
+            <p>Score your fit across curated job profiles.</p>
+          </article>
+          <article class="glass-card step-card">
+            <span class="step-num">04</span>
+            <div class="step-icon">📊</div>
+            <h3>Identify Gaps</h3>
+            <p>Highlight missing skills by importance level.</p>
+          </article>
+          <article class="glass-card step-card">
+            <span class="step-num">05</span>
+            <div class="step-icon">🚀</div>
+            <h3>Accelerate</h3>
+            <p>Get course suggestions and a career timeline.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="features" id="features">
+        <div class="section-header">
+          <span class="eyebrow">Platform Features</span>
+          <h2>Built for premium career guidance.</h2>
+        </div>
+        <div class="features-grid">
+          <article class="glass-card feature-card featured">
+            <div class="feat-icon">⚡</div>
+            <h3>Resume Parsing</h3>
+            <p>Reads PDF, DOCX, and TXT files with structured extraction via PyMuPDF and python-docx.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <div class="feat-icon">🧠</div>
+            <h3>Skill Intelligence</h3>
+            <p>Finds normalized technical and business skill signals using spaCy NLP.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <div class="feat-icon">🎯</div>
+            <h3>Job Matching</h3>
+            <p>Ranks roles using TF-IDF cosine similarity against 30 curated job listings.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <div class="feat-icon">📉</div>
+            <h3>Gap Analysis</h3>
+            <p>Categorizes skill gaps by required, high, and nice-to-have priority levels.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <div class="feat-icon">📚</div>
+            <h3>Course Guidance</h3>
+            <p>Maps missing skills to relevant, real-world learning paths from top platforms.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <div class="feat-icon">🗺️</div>
+            <h3>Career Path Prediction</h3>
+            <p>Builds a staged roadmap for the next 6 weeks and 3 months with concrete milestones.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- TECH STACK -->
+      <section class="tech-stack" id="tech">
+        <div class="section-header">
+          <span class="eyebrow">Under the Hood</span>
+          <h2>Modern tools powering every match.</h2>
+        </div>
+        <div class="stack-grid glass-card">
+          <div class="stack-item"><span class="stack-icon">⚡</span><span>FastAPI</span></div>
+          <div class="stack-item"><span class="stack-icon">🧠</span><span>spaCy</span></div>
+          <div class="stack-item"><span class="stack-icon">📐</span><span>scikit-learn</span></div>
+          <div class="stack-item"><span class="stack-icon">🗄️</span><span>SQLite</span></div>
+          <div class="stack-item"><span class="stack-icon">📄</span><span>PyMuPDF</span></div>
+          <div class="stack-item"><span class="stack-icon">📝</span><span>python-docx</span></div>
+          <div class="stack-item"><span class="stack-icon">🌐</span><span>Vanilla JS</span></div>
+          <div class="stack-item"><span class="stack-icon">🎨</span><span>Glassmorphism UI</span></div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta glass-card">
+        <div class="cta-orb cta-orb-1"></div>
+        <div class="cta-orb cta-orb-2"></div>
+        <span class="eyebrow">Ready To Move Faster?</span>
+        <h2>Use SkillMatch AI to turn your profile into a targeted career strategy.</h2>
+        <p>Upload your resume and get your personalised career report in seconds.</p>
+        <a class="primary-btn" href="#demo">Launch Demo →</a>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="footer">
+      <div class="footer-brand">
+        <div class="brand-mark">⬡</div>
+        <div>
+          <strong>SkillMatch <em>AI</em></strong>
+          <p>AI career matching for modern technical talent.</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#demo">Demo</a>
+        <a href="#features">Features</a>
+        <a href="#tech">Tech Stack</a>
+      </div>
+    </footer>
+
+  </div><!-- /page-shell -->
+
+  <script src="./script.js"></script>
+</body>
+</html>
